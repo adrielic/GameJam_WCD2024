@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using UnityEditor;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -11,11 +7,14 @@ public class PlayerController : MonoBehaviour
     private Animator anim;
 
     private Vector2 direction;
+    private int dirLookX;
     [SerializeField] private float moveSpeed, jumpForce;
 
     private bool isGrounded, isClimbable, jump;
 
-    // Start is called before the first frame update
+    [SerializeField]
+    private LayerMask interactableObjs;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -23,7 +22,6 @@ public class PlayerController : MonoBehaviour
         anim = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         ReadInput();
@@ -51,11 +49,18 @@ public class PlayerController : MonoBehaviour
         rb.velocity = new Vector2(direction.x * moveSpeed, rb.velocity.y);
 
         if (direction.x != 0)
+        {
             anim.SetBool("Moving", true);
+        }
         else
             anim.SetBool("Moving", false);
 
-        Flip(direction.x);
+        if(rb.velocity.x > 0)
+            dirLookX = 1;
+        if(rb.velocity.x < 0)
+            dirLookX = -1;
+
+        Flip(dirLookX);
     }
 
     void Flip(float dirX)
@@ -97,8 +102,17 @@ public class PlayerController : MonoBehaviour
         if (interact)
         {
             anim.SetTrigger("Interact");
-            Debug.Log("interact = " + interact);
+
+            Collider2D verifyCollision = Physics2D.OverlapCircle(transform.position, 1.5f, interactableObjs);
+
+            if(verifyCollision != null)
+                verifyCollision.GetComponent<InteractableController>().interacted = true;
         }
+    }
+
+    private void OnDrawGizmosSelected() 
+    {
+        Gizmos.DrawWireSphere(transform.position, 1.5f);
     }
 
     void OnCollisionEnter2D(Collision2D col)
