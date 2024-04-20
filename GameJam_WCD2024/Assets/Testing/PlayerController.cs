@@ -55,9 +55,9 @@ public class PlayerController : MonoBehaviour
         else
             anim.SetBool("Moving", false);
 
-        if(rb.velocity.x > 0)
+        if (rb.velocity.x > 0)
             dirLookX = 1;
-        if(rb.velocity.x < 0)
+        if (rb.velocity.x < 0)
             dirLookX = -1;
 
         Flip(dirLookX);
@@ -99,18 +99,20 @@ public class PlayerController : MonoBehaviour
 
     void Interact(bool interact)
     {
-        if (interact)
+        Collider2D verifyCollision = Physics2D.OverlapCircle(transform.position, 1.5f, interactableObjs);
+
+        if (verifyCollision != null)
         {
-            anim.SetTrigger("Interact");
+            if (interact)
+            {
+                anim.SetTrigger("Interact");
 
-            Collider2D verifyCollision = Physics2D.OverlapCircle(transform.position, 1.5f, interactableObjs);
-
-            if(verifyCollision != null)
                 verifyCollision.GetComponent<InteractableController>().interacted = true;
+            }
         }
     }
 
-    private void OnDrawGizmosSelected() 
+    private void OnDrawGizmosSelected()
     {
         Gizmos.DrawWireSphere(transform.position, 1.5f);
     }

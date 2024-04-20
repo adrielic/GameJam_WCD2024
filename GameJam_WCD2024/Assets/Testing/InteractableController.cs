@@ -10,37 +10,56 @@ public class InteractableController : MonoBehaviour
 
     void Update()
     {
-        if(interacted)
+        if (interacted)
             Interacted(function);
     }
 
     void Interacted(string function)
     {
-        switch(function)
+        switch (function)
         {
+            case "House":
+                Debug.Log("Passou de cena");
+                break;
             case "Food":
-                GameManager.instance.needsFood --;
+                GameManager.instance.needsFood--;
+                gameObject.GetComponent<Collider2D>().enabled = false;
+                interacted = false;
                 break;
             case "Water":
-                GameManager.instance.needsWater --;
+                GameManager.instance.needsWater--;
+                gameObject.GetComponent<Collider2D>().enabled = false;
+                interacted = false;
                 break;
             case "Herb":
-                GameManager.instance.needsHerb --;
+                GameManager.instance.needsHerb--;
+                gameObject.GetComponent<Collider2D>().enabled = false;
+                interacted = false;
                 break;
             case "Campfire":
-                GameManager.instance.needsCampfire --;
+                GameManager.instance.needsCampfire--;
+                gameObject.GetComponent<Collider2D>().enabled = false;
+                interacted = false;
                 break;
             case "Bridge":
-                
+                TreeFalling();
                 break;
             case "Honey":
-            
+                HoneyFalling();
                 break;
         }
-        
-        gameObject.GetComponent<Collider2D>().enabled = false;
-        interacted = false;
     }
 
-    
+    void TreeFalling()
+    {
+        Animator anim = GetComponent<Animator>();
+        anim.SetBool("Fall", true);
+        gameObject.layer = 6;
+    }
+
+    void HoneyFalling()
+    {
+        FixedJoint2D fixJoint = GetComponent<FixedJoint2D>();
+        fixJoint.enabled = false;
+    }
 }
