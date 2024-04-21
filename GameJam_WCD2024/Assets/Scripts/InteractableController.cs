@@ -38,6 +38,8 @@ public class InteractableController : MonoBehaviour
                     GameManager.instance.needsHerb--;
                     Destroy(gameObject);
                 }
+                else
+                    GameManager.instance.Death("Herb");
                 break;
             case "Campfire":
                 GameManager.instance.needsCampfire--;

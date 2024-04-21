@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private float curTime, maxTimeInMinutes;
 
+    [SerializeField] private GameObject deathTimeOut, deathHerb, deathDrowned, deathBear, deathRavine;
+
     void Awake()
     {
         instance = this;
@@ -68,12 +70,43 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(curScene + 1);
     }
 
+    public void RestartLevel()
+    {
+        int curScene = SceneManager.GetActiveScene().buildIndex;
+
+        SceneManager.LoadScene(curScene);
+    }
+
+    public void Death(string death)
+    {
+        switch (death)
+        {
+            case "TimeOut":
+                deathTimeOut.SetActive(true);
+                break;
+            case "Herb":
+                deathHerb.SetActive(true);
+                break;
+            case "Drowned":
+                deathDrowned.SetActive(true);
+                break;
+            case "Bear":
+                deathBear.SetActive(true);
+                break;
+            case "Ravine":
+                deathRavine.SetActive(true);
+                break;
+        }
+    }
+
+
+
     IEnumerator Timer(float maxTime)
     {
         while (true)
         {
             if (curTime > maxTime * 60)
-                Debug.Log("Acabou o tempo");
+                Death("TimeOut");
 
             yield return new WaitForSeconds(1);
 
