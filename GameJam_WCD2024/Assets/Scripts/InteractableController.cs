@@ -19,7 +19,7 @@ public class InteractableController : MonoBehaviour
         switch (function)
         {
             case "House":
-                Debug.Log("Passou de cena");
+                GameManager.instance.NextLevel();
                 break;
             case "Food":
                 GameManager.instance.needsFood--;

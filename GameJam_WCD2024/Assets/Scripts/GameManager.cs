@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -58,6 +59,13 @@ public class GameManager : MonoBehaviour
             campIcon.GetComponent<Animator>().SetBool("IsNeeded", true);
         else
             campIcon.GetComponent<Animator>().SetBool("IsNeeded", false);
+    }
+
+    public void NextLevel()
+    {
+        int curScene = SceneManager.GetActiveScene().buildIndex;
+
+        SceneManager.LoadScene(curScene + 1);
     }
 
     IEnumerator Timer(float maxTime)
