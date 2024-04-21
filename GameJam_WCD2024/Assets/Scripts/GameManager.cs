@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     public int needsFood, needsWater, needsHerb, needsCampfire;
-    public GameObject waterIcon, hungerIcon, herbIcon, campIcon, needsPnl, pausePnl;
+    public GameObject waterIcon, hungerIcon, herbIcon, campIcon, needsPnl, pausePnl, gameOverPnl;
     [SerializeField] private GameObject houseObj;
 
     [SerializeField] private float curTime, maxTimeInMinutes;
@@ -67,7 +67,12 @@ public class GameManager : MonoBehaviour
     {
         int curScene = SceneManager.GetActiveScene().buildIndex;
 
-        SceneManager.LoadScene(curScene + 1);
+        if (curScene == 7)
+        {
+            SceneManager.LoadScene(0);
+        }
+        else
+            SceneManager.LoadScene(curScene + 1);
     }
 
     public void RestartLevel()
@@ -77,23 +82,33 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(curScene);
     }
 
+    public void ReturnToMenu()
+    {
+        SceneManager.LoadScene(0);
+    }
+
     public void Death(string death)
     {
         switch (death)
         {
             case "TimeOut":
+                gameOverPnl.SetActive(true);
                 deathTimeOut.SetActive(true);
                 break;
             case "Herb":
+                gameOverPnl.SetActive(true);
                 deathHerb.SetActive(true);
                 break;
             case "Drowned":
+                gameOverPnl.SetActive(true);
                 deathDrowned.SetActive(true);
                 break;
             case "Bear":
+                gameOverPnl.SetActive(true);
                 deathBear.SetActive(true);
                 break;
             case "Ravine":
+                gameOverPnl.SetActive(true);
                 deathRavine.SetActive(true);
                 break;
         }
