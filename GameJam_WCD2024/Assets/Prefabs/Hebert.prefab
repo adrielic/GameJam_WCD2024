@@ -163,7 +163,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
-  jumpForce: 5.5
+  jumpForce: 6.5
   interactText: {fileID: 0}
   interactableObjs:
     serializedVersion: 2
