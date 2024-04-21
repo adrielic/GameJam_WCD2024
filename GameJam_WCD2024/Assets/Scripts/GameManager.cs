@@ -37,8 +37,6 @@ public class GameManager : MonoBehaviour
 
     void NeedsSystem()
     {
-        Debug.Log(needsFood + ", " + needsWater + ", " + needsHerb + ", " + needsCampfire);
-
         if (needsFood <= 0 && needsWater <= 0 && needsHerb <= 0 && needsCampfire <= 0)
             houseObj.GetComponent<Collider2D>().enabled = true;
 

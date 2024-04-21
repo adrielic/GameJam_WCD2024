@@ -63,6 +63,7 @@ public class InteractableController : MonoBehaviour
 
     void HoneyFalling()
     {
+        gameObject.GetComponent<Collider2D>().enabled = false;
         FixedJoint2D fixJoint = GetComponent<FixedJoint2D>();
         fixJoint.enabled = false;
     }

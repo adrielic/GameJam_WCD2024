@@ -5,30 +5,31 @@ using UnityEngine;
 public class LogMovement : MonoBehaviour
 {
     private Rigidbody2D rb;
-    [SerializeField] private float speed, timeUntilInvert;
+
+    [SerializeField] private float speed, dirX, initPosX;
     private bool onWater;
 
-    // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        StartCoroutine(InvertDirection(timeUntilInvert));
+
+        initPosX = transform.position.x;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (onWater)
-            rb.velocity = new Vector2(speed, rb.velocity.y);
+        Move();
     }
 
-    IEnumerator InvertDirection(float waitTime)
+    void Move()
     {
-        while (true)
-        {
-            yield return new WaitForSeconds(waitTime);
-            speed *= -1;
-        }
+        if (transform.position.x < initPosX - 5.5f)
+            dirX = 1;
+        if (transform.position.x > initPosX + 5.5f)
+            dirX = -1;
+
+        if (onWater)
+            rb.velocity = new Vector2(speed * dirX, rb.velocity.y);
     }
 
     void OnTriggerEnter2D(Collider2D col)

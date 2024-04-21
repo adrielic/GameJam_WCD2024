@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
 
     private Vector2 direction;
     [SerializeField] private float moveSpeed, jumpForce;
-    private bool canClimb, justJumped, isSinking;
+    private bool canClimb, justJumped;
 
     [SerializeField]
     private TextMeshProUGUI interactText;
@@ -49,11 +49,6 @@ public class PlayerController : MonoBehaviour
         Move();
         Jump();
         Climb();
-
-        if (isSinking && !IsGrounded())
-        {
-            rb.AddForce(Vector2.down * 100);
-        }
     }
 
     void Move()
@@ -147,11 +142,6 @@ public class PlayerController : MonoBehaviour
             canClimb = true;
             anim.SetBool("Climbing", true);
         }
-
-        if (col.gameObject.layer == 4)
-        {
-            isSinking = true;
-        }
     }
 
     void OnTriggerExit2D(Collider2D col)
@@ -161,11 +151,6 @@ public class PlayerController : MonoBehaviour
             canClimb = false;
             anim.SetBool("Climbing", false);
         }
-
-        if (col.gameObject.layer == 4)
-        {
-            isSinking = false;
-        }
     }
 
     void OnCollisionEnter2D(Collision2D other) 
@@ -173,7 +158,7 @@ public class PlayerController : MonoBehaviour
         if(other.gameObject.tag == "Death" && other.gameObject.layer == 4)
             GameManager.instance.Death("Drowned");
         if(other.gameObject.tag == "Death" && other.gameObject.layer == 10)
-            GameManager.instance.Death("Drowned");
+            GameManager.instance.Death("Bear");
         if(other.gameObject.tag == "Death" && other.gameObject.layer == 11)
             GameManager.instance.Death("Ravine");
     }

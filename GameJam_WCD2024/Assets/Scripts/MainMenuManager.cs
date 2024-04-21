@@ -12,6 +12,11 @@ public class MainMenuManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
+    public void BackMenu()
+    {
+        SceneManager.LoadScene(0);
+    }
+
     public void Credits()
     {
         menu.SetActive(false);
