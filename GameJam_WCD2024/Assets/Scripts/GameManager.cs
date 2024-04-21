@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     public int needsFood, needsWater, needsHerb, needsCampfire;
     public GameObject waterIcon, hungerIcon, herbIcon, campIcon, needsPnl, pausePnl;
     [SerializeField] private GameObject houseObj;
+
     [SerializeField] private float curTime, maxTimeInMinutes;
 
     void Awake()

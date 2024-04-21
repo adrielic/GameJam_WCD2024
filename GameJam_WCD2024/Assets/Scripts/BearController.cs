@@ -8,10 +8,12 @@ public class BearController : MonoBehaviour
     private GameObject target;
 
     private Rigidbody2D rig;
+    private Animator anim;
 
     void Start()
     {
         rig = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
     }
 
     void FixedUpdate()
@@ -30,5 +32,7 @@ public class BearController : MonoBehaviour
 
             GetComponent<Collider2D>().excludeLayers = LayerMask.GetMask("Default");
         }
+
+        anim.SetInteger("Spd", (int) rig.velocity.x);
     }
 }

@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -8,7 +9,10 @@ public class PlayerController : MonoBehaviour
 
     private Vector2 direction;
     [SerializeField] private float moveSpeed, jumpForce;
-    private bool isGrounded, canClimb, isSinking, justJumped;
+    private bool canClimb, justJumped;
+
+    [SerializeField]
+    private TextMeshProUGUI interactText;
 
     [SerializeField]
     private LayerMask interactableObjs, groundLayer;
@@ -101,6 +105,8 @@ public class PlayerController : MonoBehaviour
 
         if (verifyCollision != null)
         {
+            interactText.text = "Pressione 'J' ou 'X' para interagir!";
+
             if (interact)
             {
                 anim.SetTrigger("Interact");
@@ -108,12 +114,15 @@ public class PlayerController : MonoBehaviour
                 verifyCollision.GetComponent<InteractableController>().interacted = true;
             }
         }
+
+        else
+            interactText.text = null;
     }
 
     bool IsGrounded()
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 1.1f, groundLayer);
-        Debug.DrawRay(transform.position, Vector2.down * 1.1f, Color.red);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 1.25f, groundLayer);
+        Debug.DrawRay(transform.position, Vector2.down * 1.25f, Color.red);
 
         if (hit.collider != null)
             return true;

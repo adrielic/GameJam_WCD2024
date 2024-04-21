@@ -24,6 +24,7 @@ public class InteractableController : MonoBehaviour
             case "Food":
                 GameManager.instance.needsFood--;
                 gameObject.GetComponent<Collider2D>().enabled = false;
+                gameObject.GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, 0.5f);
                 interacted = false;
                 break;
             case "Water":
@@ -32,14 +33,15 @@ public class InteractableController : MonoBehaviour
                 interacted = false;
                 break;
             case "Herb":
-                GameManager.instance.needsHerb--;
-                gameObject.GetComponent<Collider2D>().enabled = false;
-                interacted = false;
+                if (gameObject.tag != "Death")
+                {
+                    GameManager.instance.needsHerb--;
+                    Destroy(gameObject);
+                }
                 break;
             case "Campfire":
                 GameManager.instance.needsCampfire--;
-                gameObject.GetComponent<Collider2D>().enabled = false;
-                interacted = false;
+                Destroy(gameObject);
                 break;
             case "Bridge":
                 TreeFalling();
