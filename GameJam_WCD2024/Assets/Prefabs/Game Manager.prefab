@@ -55,11 +55,15 @@ MonoBehaviour:
   needsPnl: {fileID: 0}
   pausePnl: {fileID: 0}
   gameOverPnl: {fileID: 0}
-  houseObj: {fileID: 0}
   curTime: 0
   maxTimeInMinutes: 1
+  houseObj: {fileID: 0}
   deathTimeOut: {fileID: 0}
   deathHerb: {fileID: 0}
   deathDrowned: {fileID: 0}
   deathBear: {fileID: 0}
   deathRavine: {fileID: 0}
+  bearDeath: {fileID: 8300000, guid: b9c0aa5de0831f24ea86c34bef3468ab, type: 3}
+  drownedDeath: {fileID: 8300000, guid: dd4a844a2cf34cd4ca9accb9c479dc38, type: 3}
+  fallDeath: {fileID: 8300000, guid: 6c2b1b11665efdc4a8b89f4861a7a227, type: 3}
+  mushroomDeath: {fileID: 8300000, guid: 8ba6a26bcf70d8f41842c41ba9651af6, type: 3}

@@ -16,11 +16,13 @@ public class GameOverManager : MonoBehaviour
 
     public void Retry()
     {
+        Time.timeScale = 1;
         GameManager.instance.RestartLevel();
     }
 
     public void Menu()
     {
+        Time.timeScale = 1;
         GameManager.instance.ReturnToMenu();
     }
 }

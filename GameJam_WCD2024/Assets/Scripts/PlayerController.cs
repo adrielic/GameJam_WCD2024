@@ -17,6 +17,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private LayerMask interactableObjs, groundLayer;
 
+    [SerializeField] private AudioClip interactionClip;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -110,7 +112,7 @@ public class PlayerController : MonoBehaviour
             if (interact)
             {
                 anim.SetTrigger("Interact");
-
+                SoundManager.instance.PlaySoundClip(interactionClip, transform, 1);
                 verifyCollision.GetComponent<InteractableController>().interacted = true;
             }
         }

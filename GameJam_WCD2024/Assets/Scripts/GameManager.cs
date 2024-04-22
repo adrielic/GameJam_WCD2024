@@ -5,18 +5,17 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-
     public int needsFood, needsWater, needsHerb, needsCampfire;
     public GameObject waterIcon, hungerIcon, herbIcon, campIcon, needsPnl, pausePnl, gameOverPnl;
-    [SerializeField] private GameObject houseObj;
-
     [SerializeField] private float curTime, maxTimeInMinutes;
-
+    [SerializeField] private GameObject houseObj;
     [SerializeField] private GameObject deathTimeOut, deathHerb, deathDrowned, deathBear, deathRavine;
+    [SerializeField] private AudioClip bearDeath, drownedDeath, fallDeath;
 
     void Awake()
     {
-        instance = this;
+        if (instance == null)
+            instance = this;
     }
 
     void Start()
@@ -63,26 +62,17 @@ public class GameManager : MonoBehaviour
 
     public void NextLevel()
     {
-        int curScene = SceneManager.GetActiveScene().buildIndex;
-
-        if (curScene == 7)
-        {
-            SceneManager.LoadScene(0);
-        }
-        else
-            SceneManager.LoadScene(curScene + 1);
+        LevelLoader.instance.LoadScene("Next");
     }
 
     public void RestartLevel()
     {
-        int curScene = SceneManager.GetActiveScene().buildIndex;
-
-        SceneManager.LoadScene(curScene);
+        LevelLoader.instance.LoadScene("Reload");
     }
 
     public void ReturnToMenu()
     {
-        SceneManager.LoadScene(0);
+        LevelLoader.instance.LoadScene("First");
     }
 
     public void Death(string death)
@@ -98,21 +88,22 @@ public class GameManager : MonoBehaviour
                 deathHerb.SetActive(true);
                 break;
             case "Drowned":
+                SoundManager.instance.PlaySoundClip(drownedDeath, transform, 0.7f);
                 gameOverPnl.SetActive(true);
                 deathDrowned.SetActive(true);
                 break;
             case "Bear":
+                SoundManager.instance.PlaySoundClip(bearDeath, transform, 0.7f);
                 gameOverPnl.SetActive(true);
                 deathBear.SetActive(true);
                 break;
             case "Ravine":
+                SoundManager.instance.PlaySoundClip(fallDeath, transform, 1);
                 gameOverPnl.SetActive(true);
                 deathRavine.SetActive(true);
                 break;
         }
     }
-
-
 
     IEnumerator Timer(float maxTime)
     {

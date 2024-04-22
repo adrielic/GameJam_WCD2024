@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3559309443937788148}
   m_Layer: 0
-  m_Name: Game Over Spots
+  m_Name: Death Areas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

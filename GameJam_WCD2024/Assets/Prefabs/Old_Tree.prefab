@@ -167,3 +167,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interacted: 0
   function: Bridge
+  treeFalling: {fileID: 8300000, guid: 21cc59e91adc1d04d8e22a1c3b335344, type: 3}

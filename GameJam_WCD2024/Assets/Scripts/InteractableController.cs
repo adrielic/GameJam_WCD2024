@@ -8,6 +8,8 @@ public class InteractableController : MonoBehaviour
     [SerializeField]
     private string function;
 
+    [SerializeField] private AudioClip treeFalling;
+
     void Update()
     {
         if (interacted)
@@ -57,6 +59,7 @@ public class InteractableController : MonoBehaviour
     void TreeFalling()
     {
         Animator anim = GetComponent<Animator>();
+        SoundManager.instance.PlaySoundClip(treeFalling, transform, 1);
         anim.SetBool("Fall", true);
         gameObject.layer = 6;
     }

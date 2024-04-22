@@ -171,6 +171,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
+  interactionClip: {fileID: 8300000, guid: 2a6b4093c1f774e4a8ac15af1d11c459, type: 3}
 --- !u!95 &4683633859204590745
 Animator:
   serializedVersion: 5

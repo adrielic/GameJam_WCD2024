@@ -13,10 +13,16 @@ public class PauseManager : MonoBehaviour
     {
         Time.timeScale = 1;
     }
-
+    
     public void Resume()
     {
         gameObject.SetActive(false);
         GameManager.instance.needsPnl.SetActive(true);
+    }
+
+    public void ReturnToMenu()
+    {
+        Time.timeScale = 1;
+        GameManager.instance.ReturnToMenu();
     }
 }
