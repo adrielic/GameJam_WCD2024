@@ -17,8 +17,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private LayerMask interactableObjs, groundLayer;
 
-    [SerializeField] private AudioClip interactionClip;
-
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -34,6 +32,8 @@ public class PlayerController : MonoBehaviour
             anim.SetBool("Grounded", true);
         else
             anim.SetBool("Grounded", false);
+
+        transform.position = new Vector2(Mathf.Clamp(transform.position.x, -50, 50), transform.position.y);
     }
 
     void ReadInput()
@@ -112,7 +112,6 @@ public class PlayerController : MonoBehaviour
             if (interact)
             {
                 anim.SetTrigger("Interact");
-                SoundManager.instance.PlaySoundClip(interactionClip, transform, 1);
                 verifyCollision.GetComponent<InteractableController>().interacted = true;
             }
         }
@@ -155,13 +154,13 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void OnCollisionEnter2D(Collision2D other) 
+    void OnCollisionEnter2D(Collision2D other)
     {
-        if(other.gameObject.tag == "Death" && other.gameObject.layer == 4)
+        if (other.gameObject.tag == "Death" && other.gameObject.layer == 4)
             GameManager.instance.Death("Drowned");
-        if(other.gameObject.tag == "Death" && other.gameObject.layer == 10)
+        if (other.gameObject.tag == "Death" && other.gameObject.layer == 10)
             GameManager.instance.Death("Bear");
-        if(other.gameObject.tag == "Death" && other.gameObject.layer == 11)
+        if (other.gameObject.tag == "Death" && other.gameObject.layer == 11)
             GameManager.instance.Death("Ravine");
     }
 }

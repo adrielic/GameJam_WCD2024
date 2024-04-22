@@ -4,10 +4,18 @@ using UnityEngine;
 
 public class MainMenuManager : MonoBehaviour
 {
-    [SerializeField] private GameObject menu, credits;
+    [SerializeField] private GameObject menu, credits, musicManager;
+    private static bool firstTime = true;
+
+    void Awake()
+    {
+        if (firstTime)
+            Instantiate(musicManager);
+    }
 
     public void Play()
     {
+        firstTime = false;
         LevelLoader.instance.LoadSpecificScene(1);
     }
 

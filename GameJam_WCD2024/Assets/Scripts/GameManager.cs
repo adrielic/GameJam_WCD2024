@@ -10,7 +10,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float curTime, maxTimeInMinutes;
     [SerializeField] private GameObject houseObj;
     [SerializeField] private GameObject deathTimeOut, deathHerb, deathDrowned, deathBear, deathRavine;
-    [SerializeField] private AudioClip bearDeath, drownedDeath, fallDeath;
 
     void Awake()
     {
@@ -88,21 +87,20 @@ public class GameManager : MonoBehaviour
                 deathHerb.SetActive(true);
                 break;
             case "Drowned":
-                SoundManager.instance.PlaySoundClip(drownedDeath, transform, 0.7f);
                 gameOverPnl.SetActive(true);
                 deathDrowned.SetActive(true);
                 break;
             case "Bear":
-                SoundManager.instance.PlaySoundClip(bearDeath, transform, 0.7f);
                 gameOverPnl.SetActive(true);
                 deathBear.SetActive(true);
                 break;
             case "Ravine":
-                SoundManager.instance.PlaySoundClip(fallDeath, transform, 1);
                 gameOverPnl.SetActive(true);
                 deathRavine.SetActive(true);
                 break;
         }
+
+        needsPnl.SetActive(false);
     }
 
     IEnumerator Timer(float maxTime)

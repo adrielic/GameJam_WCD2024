@@ -8,8 +8,6 @@ public class InteractableController : MonoBehaviour
     [SerializeField]
     private string function;
 
-    [SerializeField] private AudioClip treeFalling;
-
     void Update()
     {
         if (interacted)
@@ -25,9 +23,10 @@ public class InteractableController : MonoBehaviour
                 break;
             case "Food":
                 GameManager.instance.needsFood--;
-                gameObject.GetComponent<Collider2D>().enabled = false;
-                gameObject.GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, 0.5f);
-                interacted = false;
+                //gameObject.GetComponent<Collider2D>().enabled = false;
+                Destroy(gameObject);
+                //gameObject.GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, 0.5f);
+                //interacted = false;
                 break;
             case "Water":
                 GameManager.instance.needsWater--;
@@ -59,7 +58,6 @@ public class InteractableController : MonoBehaviour
     void TreeFalling()
     {
         Animator anim = GetComponent<Animator>();
-        SoundManager.instance.PlaySoundClip(treeFalling, transform, 1);
         anim.SetBool("Fall", true);
         gameObject.layer = 6;
     }
