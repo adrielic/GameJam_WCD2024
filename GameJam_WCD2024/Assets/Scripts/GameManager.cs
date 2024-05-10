@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float curTime, maxTimeInMinutes;
     [SerializeField] private GameObject houseObj;
     [SerializeField] private GameObject deathTimeOut, deathHerb, deathDrowned, deathBear, deathRavine;
+    public bool levelDone;
 
     void Awake()
     {
@@ -108,7 +109,10 @@ public class GameManager : MonoBehaviour
         while (true)
         {
             if (curTime > maxTime * 60)
-                Death("TimeOut");
+            {
+                if (!levelDone)
+                    Death("TimeOut");
+            }
 
             yield return new WaitForSeconds(1);
 

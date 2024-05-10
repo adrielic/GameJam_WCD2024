@@ -19,14 +19,12 @@ public class InteractableController : MonoBehaviour
         switch (function)
         {
             case "House":
+                GameManager.instance.levelDone = true;
                 GameManager.instance.NextLevel();
                 break;
             case "Food":
                 GameManager.instance.needsFood--;
-                //gameObject.GetComponent<Collider2D>().enabled = false;
                 Destroy(gameObject);
-                //gameObject.GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, 0.5f);
-                //interacted = false;
                 break;
             case "Water":
                 GameManager.instance.needsWater--;
